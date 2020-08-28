@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: simplereq
+  name: simplereq
+  annotations:
+    'consul.hashicorp.com/connect-inject': 'true'
+    'consul.hashicorp.com/connect-service-upstreams': 'staging-inframl-request-monitoring:9999, simpleserver:8080'
+spec:
+  containers:
+  - image: dixont/simplereq
+    name: simplereq
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
